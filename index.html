@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vamshi Krishan Reddy - Web Developer, IoT Student, and Designer. Explore my skills, projects, and certifications.">
+  <meta name="keywords" content="Web Development, IoT, Java, Python, C, HTML, CSS, Portfolio">
+  <title>Vamshi Krishan Reddy Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #6e7fcb, #f5c987);
+      color: #fff;
+      display: flex;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease-in-out;
+      scroll-behavior: smooth;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      padding: 20px;
+      background-color: #2e3d63;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: fixed;
+      top: 0;
+      left: 0;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+    }
+    .sidebar:hover {
+      width: 280px;
+      background-color: #3a4a72;
+    }
+    .profile-photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffffff;
+      margin-top: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s ease-in-out;
+    }
+    .profile-photo:hover {
+      transform: scale(1.1);
+    }
+    h1 {
+      font-size: 22px;
+      text-align: center;
+      margin: 20px 0;
+      font-family: 'Roboto', sans-serif;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    nav ul li {
+      margin: 15px 0;
+    }
+    nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 18px;
+      display: block;
+      text-align: center;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      aria-label: "Navigation Link";
+    }
+    nav ul li a:hover {
+      background-color: #00BCD4;
+      color: #121212;
+    }
+    /* Content Area */
+    .content {
+      margin-left: 270px;
+      padding: 40px;
+      width: calc(100% - 270px);
+      overflow-y: auto;
+      height: 100vh;
+      transition: margin-left 0.3s ease-in-out;
+    }
+    .section {
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+    .section.active {
+      display: block;
+    }
+    h2 {
+      font-size: 30px;
+      margin-bottom: 20px;
+      font-family: 'Roboto', sans-serif;
+      color: #333;
+    }
+    /* Home Section */
+    .home-section {
+      text-align: center;
+    }
+    .home-section img {
+      margin-top: 20px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+    }
+    .home-section h2 {
+      margin-top: 20px;
+      font-size: 30px;
+      color: #fff;
+    }
+    .home-section p {
+      font-size: 18px;
+    }
+    /* Skills Section */
+    .skill {
+      margin-bottom: 10px;
+    }
+    .progress-bar {
+      background-color: #333333;
+      border-radius: 5px;
+      padding: 5px;
+      margin-top: 5px;
+      width: 50%;
+    }
+    .progress {
+      height: 10px;
+      background-color: #00BCD4;
+      border-radius: 5px;
+      text-align: right;
+      line-height: 10px;
+      color: #ffffff;
+      padding-right: 10px;
+      font-weight: bold;
+    }
+    ul {
+      margin-top: 20px;
+      padding-left: 20px;
+    }
+    ul li {
+      margin: 10px 0;
+    }
+    ul li a {
+      color: #00BCD4;
+      text-decoration: none;
+    }
+    ul li a:hover {
+      text-decoration: underline;
+    }
+    /* Achievements / Gallery Section */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .gallery-item {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover {
+      transform: scale(1.05);
+    }
+    .gallery-item img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 2px solid #fff;
+      margin-bottom: 10px;
+    }
+    /* Add Achievement Form */
+    #add-achievement-form {
+      margin-top: 30px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 400px;
+    }
+    #add-achievement-form input[type="file"],
+    #add-achievement-form input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+    }
+    #add-achievement-form button {
+      background-color: #00BCD4;
+      color: #121212;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    #add-achievement-form button:hover {
+      background-color: #0097a7;
+    }
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+      }
+      .content {
+        margin-left: 210px;
+      }
+      .profile-photo {
+        width: 150px;
+        height: 150px;
+      }
+      nav ul li a {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <!-- Update image paths as needed -->
+    <img src="C:\Users\supri\OneDrive\Desktop\my folder\pics\backround image.jpg" class="profile-photo" alt="Profile Photo">
+    <h1>Vamshi Krishan Reddy</h1>
+    <nav>
+      <ul>
+        <li><a href="#home" onclick="showSection('home')" aria-label="Home section">Home</a></li>
+        <li><a href="#about" onclick="showSection('about')" aria-label="About section">About</a></li>
+        <li><a href="#skills" onclick="showSection('skills')" aria-label="Skills section">Skills</a></li>
+        <li><a href="#projects" onclick="showSection('projects')" aria-label="Projects section">Projects</a></li>
+        <li><a href="#certifications" onclick="showSection('certifications')" aria-label="Certifications section">Certifications</a></li>
+        <li><a href="#contact" onclick="showSection('contact')" aria-label="Contact section">Contact</a></li>
+        <li><a href="#achievements" onclick="showSection('achievements')" aria-label="Achievements section">Achievements</a></li>
+      </ul>
+    </nav>
+  </div>
+  
+  <div class="content">
+    <!-- Home Section -->
+    <section id="home" class="section active home-section">
+      <img src="C:\Users\supri\OneDrive\Desktop\my folder\WhatsApp Image 2025-04-18 at 10.33.53_374003b0.jpg" alt="Home Image">
+      <h2>Kondam Vamshi Krishan Reddy</h2>
+      <p>
+        Web Developer<br>
+        UI/UX Designer<br>
+        IoT Student
+      </p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <p>I'm Vamshi Krishan Reddy, currently pursuing a Bachelor's degree in IoT from Malla Reddy Engineering College with a CGPA of 8. I am deeply focused on gaining knowledge in data structures, problem-solving, and enhancing my programming skills in languages like Java, Python, and C. I am passionate about developing applications in web and mobile development, with a focus on creating user-friendly and intuitive designs. I am committed to learning and growing in the tech industry to contribute to innovative projects.</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="skill">
+        <p>Java</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 80%;"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <p>Python</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 70%;"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <p>C</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 90%;"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <p>HTML</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 90%;"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <p>CSS</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 90%;"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <p>JavaScript</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 80%;"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <p>TensorFlow</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 60%;"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <p>PyTorch</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 60%;"></div>
+        </div>
+      </div>
+      <div class="skill">
+        <p>Problem Solving</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: 85%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <ul>
+        <li>
+          <strong>Kaam - Job Portal for Low-Labor Workers</strong> (HTML, CSS, JavaScript)
+          <p>A job portal designed to connect low-labor workers with employers. Features include browsing available jobs, creating profiles, and applying with a focus on user accessibility.</p>
+        </li>
+        <li>
+          <strong>Personal Portfolio</strong> (HTML, CSS, JavaScript)
+          <p>A personal portfolio website designed to showcase my skills, projects, certifications, and experience with a clean, modern design and intuitive navigation.</p>
+        </li>
+        <li>
+          <strong>Music Player</strong> (HTML, CSS, JavaScript)
+          <p>A simple music player web app that allows users to upload, play, pause, and navigate tracks with an intuitive interface.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section">
+      <h2>Certifications</h2>
+      <ul>
+        <li>Introduction to Internet of Things - NPTEL</li>
+        <li>Google Cloud Study Jam Facilitator Program</li>
+        <li>Web Development with HTML, CSS, JavaScript</li>
+        <li>Python Programming</li>
+        <li>C Programming</li>
+      </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p>Phone: 9059734887</p>
+      <p>Email: vamshi6608@gmail.com</p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/vamshi-krishna-reddy-565b20258?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener">LinkedIn</a></p>
+      <p>GitHub: <a href="https://github.com/vamshi1508" target="_blank" rel="noopener">GitHub</a></p>
+      <p>LeetCode: <a href="https://leetcode.com/u/vamshi_krishna15/" target="_blank" rel="noopener">LeetCode</a></p>
+      <p>CodeChef: <a href="https://www.codechef.com/users/gamey_lamp_18" target="_blank" rel="noopener">CodeChef</a></p>
+      <p>HackerRank: <a href="https://www.hackerrank.com/profile/22J41A6932" target="_blank" rel="noopener">HackerRank</a></p>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
+      <h2>Achievements &amp; Events</h2>
+      <div class="gallery">
+        
+        <!-- New achievements will be added here dynamically -->
+      </div>
+      <!-- Add Achievement Form -->
+      <div id="add-achievement-form">
+        <h3>Add New Achievement</h3>
+        <input type="file" id="imageInput">
+        <input type="text" id="descInput" placeholder="Enter Description">
+        <button onclick="addAchievement()">Add</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Function to display selected section and hide others
+    const sections = document.querySelectorAll('.section');
+    function showSection(sectionId) {
+      sections.forEach(function(section) {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    // Function to add a new achievement dynamically
+    function addAchievement() {
+      const gallery = document.querySelector('.gallery');
+      const imageInput = document.getElementById('imageInput');
+      const descInput = document.getElementById('descInput');
+
+      const file = imageInput.files[0];
+      const desc = descInput.value.trim();
+
+      if (!file || desc === '') {
+        alert('Please upload an image and enter a description.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const newItem = document.createElement('div');
+        newItem.className = 'gallery-item';
+        newItem.innerHTML = `
+          <img src="${e.target.result}" alt="Achievement Image">
+          <p>${desc}</p>
+        `;
+        gallery.appendChild(newItem);
+        // Clear form inputs
+        imageInput.value = '';
+        descInput.value = '';
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
